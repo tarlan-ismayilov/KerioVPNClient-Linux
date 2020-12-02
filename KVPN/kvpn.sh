@@ -27,12 +27,12 @@ name10=$(sed -n "10 p" names.db)
 
 menu() {
 printf "\n"  
-printf "            \e[1;91m     <<<  Welcome to Kerio VPN Client By Tarlan >>>\n " 
+printf "            \e[1;91m     <<<  Welcome to Kerio VPN Client By Tarlan >>> " 
 show_gl_ip
 
 string=$choice
-printf "\n"                                                                   
-printf "\e[1;92m [\e[0m\e[1;93m1\e[0m\e[1;92m]  >>\e[1;93m   ${name1}\e[0m\n "                  
+                                                                  
+printf "\e[1;92m[\e[0m\e[1;93m1\e[0m\e[1;92m]  >>\e[1;93m   ${name1}\e[0m\n "                  
 printf "\e[1;92m[\e[0m\e[1;93m2\e[0m\e[1;92m]  >>\e[1;93m   ${name2}\e[0m\n "                   
 printf "\e[1;92m[\e[0m\e[1;93m3\e[0m\e[1;92m]  >>\e[1;93m   ${name3}\e[0m\n "                   
 printf "\e[1;92m[\e[0m\e[1;93m4\e[0m\e[1;92m]  >>\e[1;93m   ${name4}\e[0m\n "                  
@@ -475,7 +475,6 @@ fi
 
 
 
- 
  
  
 
