@@ -4,7 +4,8 @@
 menu() {
 get-status(){
 vpn_ip=$(ifconfig kvnet | egrep -o 'inet [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d' ' -f2)
-gl_ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+gl_ip=$(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com)
 pgrep -i kvpncsvc > /tmp/kvpn.status
 
 status=$(sed -n "1 p" /tmp/kvpn.status)
@@ -108,8 +109,8 @@ printf "\e[1;92m[\e[0m\e[1;93m9\e[0m\e[1;92m]  >>\e[1;91m    ${ip9}  	\e[1;93m${
 printf "\e[1;92m[\e[0m\e[1;93m10\e[0m\e[1;92m] >>\e[1;91m    ${ip10}    \e[1;93m${name10}\e[0m\n"
 #printf "\e[1;92m [\e[0m\e[1;96mi\e[0m\e[1;92m]\e[1;92m  Show VPN Ip Info\e[0m\n"
 printf "\e[1;92m [\e[0m\e[1;96mc\e[0m\e[1;92m]\e[1;92m  Configure Kerio VPN Connection\e[0m\n"
-printf "\e[1;92m [\e[0m\e[1;96me\e[0m\e[1;92m]\e[1;92m  Edit VPN Name \e[0m\n"
-printf "\e[1;92m [\e[0m\e[1;91md\e[0m\e[1;92m]\e[1;91m  Disconnect\e[0m\n"
+printf "\e[1;92m [\e[0m\e[1;96me\e[0m\e[1;92m]\e[1;92m  Edit VPN Name \e[0m	\e[1;92m [\e[0m\e[1;93mdel\e[0m\e[1;92m]\e[1;91m  Delete VPN \e[0m\n"
+printf "\e[1;92m [\e[0m\e[1;91md\e[0m\e[1;92m]\e[1;91m  Disconnect\e[0m	\e[1;92m [\e[0m\e[1;93mr\e[0m\e[1;92m]\e[1;91m  Restart VPN Service \e[0m\n"
 printf "\e[1;92m [\e[0m\e[1;91mq\e[0m\e[1;92m]\e[1;91m  Quit\e[0m\n"
 
 #printf "\n"
@@ -289,9 +290,11 @@ sudo /etc/init.d/kerio-kvc stop
 get-status
 menu
 
- 
+elif [[ $choice == "del" ]]; then 
+delmenu
 
 elif [[ $choice == "s" ]]; then
+
 savemenu
 elif [[ $choice == "i" ]]; then
 ifconfig kvnet |grep 'inet '
@@ -569,6 +572,72 @@ else
 printf "\n\e[1;43m[!] Input Name !\e[0m\n\n"
 editmenu
 fi
+}
+
+delmenu(){
+
+read -p $'\e[1;92m[*] Choose a VPN Number : \e[0m' choice
+
+if [[ $choice == "1" ]]; then
+echo > 1
+sed -i "1s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "2" ]]; then
+echo > 2
+sed -i "2s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "3" ]]; then
+echo > 3
+sed -i "3s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "4" ]]; then
+echo > 4
+sed -i "4s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "5" ]]; then
+echo > 5
+sed -i "5s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "6" ]]; then
+echo > 6
+sed -i "6s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "7" ]]; then
+echo > 7
+sed -i "7s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "8" ]]; then
+echo > 8
+sed -i "8s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "9" ]]; then
+echo > 9
+sed -i "9s/.*$/empty/" names.db
+menu
+
+elif [[ $choice == "10" ]]; then
+echo > 10
+sed -i "10s/.*$/empty/" names.db
+menu
+
+
+
+else
+ menu
+ fi
+
+
+
+
+
 }
 
 
